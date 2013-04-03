@@ -31,23 +31,55 @@
 
 <div id="impress">
 
-    <div id="title" class="step" data-x="0" data-y="0" data-scale="4">
-        <span class="overview">An overview of</span>
-        <h1>Django</h1>
+    <div id="title" class="step" data-x="0" data-y="0" data-scale="2">
+        <span class="overview">An overview <span class="of">of</span></span>
+        
+        <h1>JavaScript</h1>
         <div class="byline">by
             <h2><strong>Nathan Alderson</strong></h2>
         </div>
     </div>
 
-    <div id="other" class="step" data-x="0" data-y="1500" data-scale="4">
-        Some other slide
-        <ul>
-            <li class='appear hidden'>item 1</li>
-            <li class='appear hidden'>item 2</li>
-            <li class='appear hidden'>item 3</li>
-        </ul>
-    </div>
-    <script>
+    <div id="bored" class="step slide" data-x="2000"> </div>
+    <div class="step slide" data-dx="1000"> </div>
+    <div class="step slide"> </div>
+    <div class="step slide" data-dx="0" data-rotate-z="90" data-dy="1000"> </div>
+    <div class="step slide"> </div>
+    <div class="step slide"> </div>
+    <div class="step slide" data-rotate-x="-90" data-dz="-1000" data-dy="0"> </div>
+    <div class="step slide" > </div>
+</div>
+
+<!-- deltas! -->
+<script>
+$(document).ready(function() {
+    var pos    = {'x':0, 'y':0, 'z':0, 'rotate-x':0, 'rotate-y':0, 'rotate-z':0};
+    var deltas = {'x':0, 'y':0, 'z':0, 'rotate-x':0, 'rotate-y':0, 'rotate-z':0};
+    $(".slide").each(function(i, e) {
+        e = $(e);
+        $(['x', 'y', 'z', 'rotate-x', 'rotate-y', 'rotate-z']).each(function(j, axis) {
+            attr = 'data-' + axis;
+            delta_attr = ('data-' + axis).replace(/[xyz]/, 'd$&');
+            if (e.attr(attr)) {
+                // they gave us an absolute value
+                pos[axis] = parseInt(e.attr(attr));
+            } else if (e.attr(delta_attr)) {
+                // they gave us a delta
+                deltas[axis] = parseInt(e.attr(delta_attr));
+                pos[axis] = pos[axis] + deltas[axis];
+            } else {
+                // they didn't give us anything, use current deltas
+                pos[axis] = pos[axis] + deltas[axis];
+            }
+            e.attr(attr, pos[axis]);
+        });
+    });
+    $(document).trigger('impress-go');
+});
+</script>
+
+<!-- Make anything with an "appear" class begin hidden and appear on keypress -->
+<script>
 $(document).on('keyup', function(e) {
     var item = $(".active li.hidden:first")
     if(item.length) {
@@ -58,9 +90,8 @@ $(document).on('keyup', function(e) {
 $(document).on('impress:stepleave', function(e) {
     $(e.target).find('.appear').addClass('hidden');
 });
-    </script>
+</script>
 
-</div>
 <!--
     
     Hint is not related to impress.js in any way.
@@ -110,7 +141,7 @@ if ("ontouchstart" in document.documentElement) {
     
 -->
 <script src="js/impress.js"></script>
-<script>impress().init();</script>
+<script>$(document).on('impress-go', function() { impress().init(); })</script>
 
 <!--
     
