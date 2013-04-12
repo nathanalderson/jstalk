@@ -78,7 +78,14 @@
         </div>
     </div>
 
-    <div id="java-vs-js" class="step" data-dx="1000">
+    <div id="the-good-parts" class="step" data-dx="1000">
+        <h1>Why not?</h1>
+        <div id="reasons">
+            <img src="img/thegoodparts.jpg" />
+        </div>
+    </div>
+
+    <div id="java-vs-js" class="step">
         <p>Java
         <span class="analogy">is to</span>
         Javascript</p>
@@ -103,33 +110,60 @@
 
     <img class="step" id="codez" src="img/c0dez.jpg" data-dx="0" data-rotate-y="90" data-dz="-1000" data-dy="0"/>
 
-    <div class="step" id="code-test" data-dy="1000" data-dz="0">
-        <pre><code class="javascript">$(document).ready(function() {
-  var pos    = {'x':0, 'y':0, 'z':0, 'rotate-x':0, 'rotate-y':0, 'rotate-z':0};
-  var deltas = {'x':0, 'y':0, 'z':0, 'rotate-x':0, 'rotate-y':0, 'rotate-z':0};
-  $(".slide").each(function(i, e) {
-    e = $(e);
-    $(['x', 'y', 'z', 'rotate-x', 'rotate-y', 'rotate-z']).each(function(j, axis) {
-      attr = 'data-' + axis;
-      delta_attr = ('data-' + axis).replace(/[xyz]/, 'd$&');
-      if (e.attr(attr)) {
-        // they gave us an absolute value
-        pos[axis] = parseInt(e.attr(attr));
-      } else if (e.attr(delta_attr)) {
-        // they gave us a delta
-        deltas[axis] = parseInt(e.attr(delta_attr));
-        pos[axis] = pos[axis] + deltas[axis];
-      } else {
-        // they didn't give us anything, use current deltas
-        pos[axis] = pos[axis] + deltas[axis];
-      }
-      e.attr(attr, pos[axis]);
-    });
-  });
-  $(document).trigger('impress-go');
-});</code></pre>
+    <p class="step" id="basic-stuff" data-dx="0" data-dy="1000" data-dz="0">Basic Stuff</p>
+
+    <div class="step" id="types">
+        <h1>Types</h1>
+        <hr>
+        <pre><code class="javascript">//types
+var num  = 1;
+var num2 = 2.0;   // no real distinction between floats and ints
+var str  = "It is pitch black. You are likely to be eaten by a grue.";
+var bool = true;
+var arr  = [1,2,"three"];
+arr[0];           // 1
+var obj  = {key:"value"}
+obj.key;          // "value"
+obj["key"];       // "value"
+var val  = null
+console.log(typeof(idontexist));  // prints "undefined"
+var add  = function(arg1, arg2) {
+    return arg1 + arg2;
+};
+add(1,2)          // 3 </code></pre>
     </div>
-    <div class="step slide"> </div>
+
+    <div class="step" id="truthiness" data-dy="1000">
+        <h1>Truthiness and Falsiness</h1>
+        <hr>
+        <pre><code class="javascript">if(false || 0 || null || undefined || "") {
+    console.log("won't print; they're all falsey");
+}
+else if(true && 1 && "anything" && [] && {}) {
+    console.log("will print; they're all truthy");
+} </code></pre>
+    </div>
+
+    <div class="step" id="its-dynamic" data-dy="400">
+        <h1>It's Dynamic!</h1>
+        <hr>
+        <pre><code class="javascript">// it's dynamic!
+var x = 1;
+x = "two";</code></pre>
+
+    </div>
+
+    <div class="step" id="everythings-an-object" data-dy="400">
+        <h1>Everything's an Object</h1>
+        <hr>
+        <pre><code class="javascript">var x = 1;
+x.member = "I'm a member variable!";
+console.log(x);       // prints 1
+console.log(x.member) // prints "I'm a member variable"
+        </code></pre>
+    </div>
+
+    <div class="step slide" data-dy="1000"> </div>
     <div class="step slide" data-dx="0" data-rotate-z="90" data-dy="1000"> </div>
     <div class="step slide"> </div>
     <div class="step slide"> </div>
