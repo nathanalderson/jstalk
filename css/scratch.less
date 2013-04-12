@@ -59,9 +59,9 @@ footer, header, hgroup, menu, nav, section {
 body {
     line-height: 1;
 }
-ol, ul {
-    list-style: none;
-}
+/* ol, ul { */
+    /* list-style: none; */
+/* } */
 blockquote, q {
     quotes: none;
 }
@@ -232,18 +232,20 @@ a:focus {
     font-size: 30px;
     line-height: 36px;
     letter-spacing: -1px;
+    q {
+        display: block;
+        font-size: 50px;
+        line-height: 72px;
+        margin-top: 100px;
+    }
+    q strong {
+        white-space: nowrap;
+    }
 }
 
-.slide q {
-    display: block;
-    font-size: 50px;
-    line-height: 72px;
-
-    margin-top: 100px;
-}
-
-.slide q strong {
-    white-space: nowrap;
+h1 {
+    color: @emph_content;
+    font-size: 150%;
 }
 
 pre {
@@ -274,49 +276,117 @@ pre {
 
 #title {
     padding: 0;
+    .an-overview {
+        font-size: 64px;
+        position: absolute;
+        top: -50px;
+        -webkit-transform: translateZ(20px);
+        -moz-transform:    translateZ(20px);
+        -ms-transform:     translateZ(20px);
+        -o-transform:      translateZ(20px);
+        transform:         translateZ(20px);
+    }
+    .of {
+        position: relative;
+        top: 70px;
+        right: 80px;
+    }
+    .byline {
+        position: relative;
+        top: -75px;
+        left: 325px;
+    }
+    h1 {
+        font-size: 190px;
+        color: @yellow;
+    }
+    .footnote {
+        font-size: 32px;
+    }
 }
 
-#title .an-overview {
-    font-size: 64px;
-    position: absolute;
-    top: -50px;
-    
-    -webkit-transform: translateZ(20px);
-    -moz-transform:    translateZ(20px);
-    -ms-transform:     translateZ(20px);
-    -o-transform:      translateZ(20px);
-    transform:         translateZ(20px);
+#about {
+    h1 {
+        color: @emph_content;
+    }
+    div.bullets {
+        float:left;
+        font-size: 24pt;
+        width: 400px;
+        ul {
+            list-style: disc;
+            ul {
+                color: @secondary_content;
+                padding-left:50px;
+            }
+        }
+        #heart {
+            font-family: 'Inconsolata';
+        }
+    }
+    div.social {
+        float:right;
+        position: relative;
+        left: 100px;
+        div {
+            font-family: 'Inconsolata';
+            font-size: 18pt;
+            padding: 10px;
+        }
+        img {
+            height: 48px;
+            vertical-align: middle;
+            padding-right: 20px;
+        }
+    }
 }
 
-#title .of {
+#whyjs {
+    h1 {
+        font-size: 100%;
+        display: inline-block;
+        width: 250px;
+        /* float: left; */
+        color: @green;
+        vertical-align: middle;
+    }
+    div#reasons {
+        display: inline-block;
+        width: 500px;
+        /* float: right; */
+        font-size: 24pt;
+        border-left: 1px solid @body_text;
+        vertical-align: middle;
+        padding-left: 50px;
+    }
+    ul {
+        list-style: disc outside;
+    }
+}
+
+#java-vs-js {
     position: relative;
-    top: 70px;
-    right: 80px;
-}
-
-#title .byline {
-    position: relative;
-    top: -75px;
-    left: 325px;
-}
-
-#title h1 {
-    font-size: 190px;
-    color: @yellow;
-    
-    /* -webkit-transform: translateZ(50px); */
-    /* -moz-transform:    translateZ(50px); */
-    /* -ms-transform:     translateZ(50px); */
-    /* -o-transform:      translateZ(50px); */
-    /* transform:         translateZ(50px); */
-}
-
-#title .footnote {
-    font-size: 32px;
+    text-align: center;
+    .analogy {
+        font-family: 'Inconsolata';
+        font-size: 20pt;
+        color: @cyan;
+    }
+    p#ceelo {
+        border-bottom: 4px solid @body_text;
+        width: 500px;
+        display: inline-block;
+    }
+    img {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        width: 300px;
+    }
 }
 
 .hidden {
-    display: none;
+    visibility: hidden;
 }
 
 #code-test {

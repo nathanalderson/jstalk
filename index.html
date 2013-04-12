@@ -38,17 +38,72 @@
 
     <div id="title" class="step" data-x="0" data-y="0" data-z="0" data-scale="6">
         <span class="an-overview">An overview <span class="of">of</span></span>
-        
         <h1>JavaScript</h1>
         <div class="byline">by
             <h2><strong>Nathan Alderson</strong></h2>
         </div>
     </div>
 
-    <div class="step" data-x="0" data-z="-3000" data-scale="1">
-        Woo!
+    <div id="about" class="step" data-x="0" data-y="0" data-z="1200" data-scale="2" data-rotate-y="90">
+        <h1>Who am I?</h1>
+        <hr>
+        <div class="bullets"> <ul>
+            <li>ME in CmpE from Vanderbilt University</li>
+            <li>Six years at Adtran</li>
+            <li>Mostly TACore developer</li>
+            <li>Things I like:
+            <ul>
+                <li>Software</li>
+                <li>Languages</li>
+                <li>Tools</li>
+            </ul></li>
+        </ul> </div>
+        <div class="social">
+            <div><img src="img/twitter.png" />@nathanalderson</div>
+            <div><img src="img/facebook.png" />facebook.com/nathanalderson</div>
+            <div><img src="img/github.png" />github.com/nathanalderson</div>
+        </div>
     </div>
-    <div class="step" id="code-test" data-dx="1000">
+
+    <div id="whyjs" class="step" data-x="1000" data-z="-3000" data-scale="1" data-rotate-y="0">
+        <h1>Why Javascript?</h1>
+        <div id="reasons">
+            <ul>
+                <li>It drives the web, and the web drives, like, everything</li>
+                <li>Lightweight, fast (now)</li>
+                <li>Multi-paradigm (procedural, functional, OO)</li>
+                <li>Great at asynchronicity</li>
+                <li>Great free tools and resources</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="java-vs-js" class="step" data-dx="1000">
+        <p>Java
+        <span class="analogy">is to</span>
+        Javascript</p>
+        <p class="analogy">as</p>
+        <p>C
+        <span class="analogy">is to</span></p>
+        <p id="ceelo"><span class="hidden appear">Cee Lo</span></p>
+        <p><img class="hidden appear" src="img/ceelo.jpg" /></p>
+    </div>
+
+    <div id="history" class="step">
+        <h1>Boring History</h1>
+        <hr>
+        <ul>
+            <li>Born at Netscape around 1995 as "LiveScript".</li>
+            <li>Quickly renamed to JavaScript.</li>
+            <li>Support added to IE in v3.0 in 1996.</li>
+            <li>Standardized as ECMAScript in 1997.</li>
+            <li>Now on ECMAScript v5.1, with v6.0 in progress.</li>
+        </ul>
+    </div>
+
+    <img class="step" id="codez" src="img/c0dez.jpg" data-dx="0" data-rotate-y="90" data-dz="-1000" data-dy="0"/>
+
+    <div class="step" id="code-test" data-dy="1000" data-dz="0">
         <pre><code class="javascript">$(document).ready(function() {
   var pos    = {'x':0, 'y':0, 'z':0, 'rotate-x':0, 'rotate-y':0, 'rotate-z':0};
   var deltas = {'x':0, 'y':0, 'z':0, 'rotate-x':0, 'rotate-y':0, 'rotate-z':0};
@@ -83,6 +138,11 @@
     <div id="overview" class="step" data-x="2500" data-y="0" data-z="0" data-rotate-x="0"
       data-rotate-y="0" data-rotate-z="0" data-scale="7">
     </div>
+    <div id="references" class="" style="display:none">
+        <ul>
+            <li><a href="https://developer.mozilla.org/en-US/docs/JavaScript">MDN</a>
+        </ul>
+    </div>
 </div>
 
 <!-- deltas! -->
@@ -116,7 +176,7 @@ $(document).ready(function() {
 <!-- Make anything with an "appear" class begin hidden and appear on keypress -->
 <script>
 $(document).on('keyup', function(e) {
-    var item = $(".active li.hidden:first")
+    var item = $(".active .hidden:first")
     if(item.length) {
         item.removeClass('hidden');
         e.preventDefault();
