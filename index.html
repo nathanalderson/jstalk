@@ -46,7 +46,7 @@
 
     <div id="about" class="step" data-x="0" data-y="0" data-z="1200" data-scale="2" data-rotate-y="90">
         <h1>Who am I?</h1>
-        <hr>
+        <hr/>
         <div class="bullets"> <ul>
             <li>BE in CmpE from Vanderbilt University</li>
             <li>Six years at Adtran</li>
@@ -98,7 +98,7 @@
 
     <div id="history" class="step">
         <h1>Boring History</h1>
-        <hr>
+        <hr/>
         <ul>
             <li>Born at Netscape around 1995 as "LiveScript".</li>
             <li>Quickly renamed to JavaScript.</li>
@@ -129,11 +129,11 @@
 
     <img class="step" id="codez" src="img/c0dez.jpg" data-dx="0" data-rotate-y="90" data-dz="-1000" data-dy="0"/>
 
-    <p class="step" id="basic-stuff" data-dx="0" data-dy="1000" data-dz="0">Basic Stuff</p>
+    <p class="step section-header" id="basic-stuff" data-dx="0" data-dy="1000" data-dz="0">Basic Stuff</p>
 
     <div class="step" id="types">
         <h1>Types</h1>
-        <hr>
+        <hr/>
         <pre><code class="javascript">//types
 var num  = 1;
 var num2 = 2.0;   // no real distinction between floats and ints
@@ -145,27 +145,34 @@ var obj  = {key:"value"}
 obj.key;          // "value"
 obj["key"];       // "value"
 var val  = null
-console.log(typeof(idontexist));  // prints "undefined"
+var val  = undefined;
 var add  = function(arg1, arg2) {
     return arg1 + arg2;
 };
 add(1,2)          // 3 </code></pre>
     </div>
 
-    <div class="step" id="truthiness" data-dy="1000">
+    <div class="step" id="truthiness" data-dy="800">
         <h1>Truthiness and Falsiness</h1>
-        <hr>
+        <hr/>
         <pre><code class="javascript">if(false || 0 || null || undefined || "") {
     console.log("won't print; they're all falsey");
 }
 else if(true && 1 && "anything" && [] && {}) {
     console.log("will print; they're all truthy");
-} </code></pre>
+}
+
+if (1 == "1")  {
+    console.log("will print; loosely equal");
+}
+if (1 === "1") {
+    console.log("will not print; not strictly equal");
+}</code></pre>
     </div>
 
-    <div class="step" id="its-dynamic" data-dy="400">
+    <div class="step" id="its-dynamic" data-dy="500">
         <h1>It's Dynamic!</h1>
-        <hr>
+        <hr/>
         <pre><code class="javascript">// it's dynamic!
 var x = 1;
 x = "two";</code></pre>
@@ -174,7 +181,7 @@ x = "two";</code></pre>
 
     <div class="step" id="everythings-an-object" data-dy="400">
         <h1>Everything's an Object</h1>
-        <hr>
+        <hr/>
         <pre><code class="javascript">var x = 1;
 x.member = "I'm a member variable!";
 console.log(x);       // prints 1
@@ -182,11 +189,177 @@ console.log(x.member) // prints "I'm a member variable"
         </code></pre>
     </div>
 
-    <div class="step slide" data-dy="1000"> </div>
-    <div class="step slide" data-dx="0" data-rotate-z="90" data-dy="1000"> </div>
+    <div class="step" id="first-class-functions" data-dy="700">
+        <h1>First Class Functions</h1>
+        <hr/>
+        <pre><code class="javascript">&gt; function printArgs(a,b) { console.log(a,b); }
+undefined
+&gt; printArgs
+[Function: printArgs]
+&gt; (printArgs instanceof Object)
+true
+&gt; var printArgsAlias = printArgs
+undefined
+&gt; printArgsAlias === printArgs
+true
+&gt; printArgs.c = 3
+3
+&gt; function decorate(printer,a,b) {
+... console.log("The arguments are...");
+... printer(a,b)
+... }
+undefined
+&gt; decorate(printArgs,1,2)
+The arguments are...
+1 2
+undefined
+&gt; decorate(printArgs,1)
+The arguments are...
+1 undefined
+undefined</code></pre>
+    </div>
+
+    <p class="step section-header" id="less-basic" data-rotate-dy="90"
+        data-dx="-1000" data-dy="0" data-dz"0">Less-Basic Stuff</p>
+
+    <div id="closures" class="step" data-rotate-dy="0" data-dx="-500" data-dy="-1000" data-dz="1000">
+        <h1>Closures</h1>
+        <hr/>
+        <p>A closure is an object consisting of a function <em>and</em> the environment (local variables)
+        in which the function what created.  Basically, it's function that remembers its context.</p>
+        <pre><code>function makeIncrementor(i) {
+  return function(x) {
+    return x+i;
+  }
+}
+
+f1 = makeIncrementor(1);
+f2 = makeIncrementor(2);
+f1(1);	// returns 2
+f2(1);	// returns 3</code></pre>
+    </div>
+
+    <div id="prototypes-summary" class="step">
+        <h1>Prototype-based Class System</h1>
+        <hr>
+        <table class="fullwidth-table">
+          <thead>
+            <tr>
+              <th scope="col">Class-based (Java)</th>
+              <th scope="col">Prototype-based (JavaScript)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Class and instance are distinct entities.</td>
+              <td>All objects are instances.</td>
+            </tr>
+            <tr>
+              <td>Define a class with a class definition; instantiate a class with constructor methods.</td>
+              <td>Define and create a set of objects with constructor functions.</td>
+            </tr>
+            <tr>
+              <td>Create a single object with the <code>new</code> operator.</td>
+              <td>Same.</td>
+            </tr>
+            <tr>
+              <td>Construct an object hierarchy by using class definitions to define subclasses of existing classes.</td>
+              <td>Construct an object hierarchy by assigning an object as the prototype associated with a constructor function.</td>
+            </tr>
+            <tr>
+              <td>Inherit properties by following the class chain.</td>
+              <td>Inherit properties by following the prototype chain.</td>
+            </tr>
+            <tr>
+              <td>Class definition specifies <em>all</em> properties of all instances of a class. Cannot add properties dynamically at run time.</td>
+              <td>Constructor function or prototype specifies an <em>initial set</em> of properties. Can add or remove properties dynamically to individual objects or to the entire set of objects.</td>
+            </tr>
+            <caption>Source: <a
+                    href="https://developer.mozilla.org/en-US/docs/JavaScript/Guide/Details_of_the_Object_Model">Mozilla Developer Network</a></caption>
+          </tbody>
+        </table>
+    </div>
+
+    <div id='prototypes-example' class="step">
+        <h1>Inheritance with Prototypes</h1>
+        <hr>
+        <div class='left'>
+            <h2>C++</h2>
+            <hr>
+            <pre><code class="cpp">class Animal {
+public:
+    Animal(string name)
+        : name(name) {}
+    virtual void speak() {}
+    string name;
+};
+
+class Cat : public Cat {
+public:
+    Cat(string name, bool canHasCheezburger)
+        : Animal(name)
+
+        , canHas(canHasCheezburger) {}
+    virtual void speak() {
+        if(canHas)
+            cout &lt;&lt; name &lt;&lt; " purrs";
+        else
+            cout &lt;&lt; name &lt;&lt; " hisses";
+    }
+    bool canHas;
+}; </code></pre>
+        </div>
+        <div class='right'>
+            <h2>JavaScript</h2>
+            <hr>
+            <pre><code class="javascript">
+
+function Animal(name) {
+    this.name = name;
+    this.speak = function() {}
+
+}
+
+
+
+function Cat(name, canHasCheezburger) {
+    this.base = Animal;
+    this.base(name);
+    this.canHas = canHasCheezburger;
+    this.speak = function() {
+        if(this.canHas)
+            console.log(this.name + " purrs");
+        else
+            console.log(this.name + " hisses");
+    }
+
+}
+Cat.prototype = new Animal;
+        </pre></code>
+        </div>
+    </div>
+
+    <div id="dom" class="step">
+        <h1>The DOM</h1>
+        <hr>
+        <a title="By Birger Eriksson (Own work) [CC-BY-SA-3.0
+            (http://creativecommons.org/licenses/by-sa/3.0)], via Wikimedia Commons"
+            href="http://commons.wikimedia.org/wiki/File%3ADOM-model.svg">
+            <img width="256" alt="DOM-model" src="img/DOM-model.svg"/>
+        </a>
+        <p>The DOM is the "Document Object Model".  It is a structural representation of the webpage
+        and provides a way for your script to interact with what the user sees.</p>
+    </div>
+
+    <div id="dom-manip" class="step">
+        <h1>Manipulating the DOM</h1>
+        <hr>
+    </div>
+
     <div class="step slide"> </div>
     <div class="step slide"> </div>
-    <div class="step slide" data-rotate-x="-90" data-dz="-1000" data-dy="0"> </div>
+    <div class="step slide"> </div>
+    <div class="step slide"> </div>
     <div class="step slide" > </div>
     <div id="overview" class="step" data-x="2500" data-y="0" data-z="0" data-rotate-x="0"
       data-rotate-y="0" data-rotate-z="0" data-scale="7">
