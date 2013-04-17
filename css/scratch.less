@@ -25,7 +25,7 @@
 /* 
     We start with a good ol' reset.
     That's the one by Eric Meyer http://meyerweb.com/eric/tools/css/reset/ 
-    
+
     You can probably argue if it is needed here, or not, but for sure it
     doesn't do any harm and gives us a fresh start.
 */
@@ -78,7 +78,7 @@ table {
 
 /*
     Now here is when interesting things start to appear.
-    
+
     We set up <body> styles with default font and nice gradient in the background.
     And yes, there is a lot of repetition there because of -prefixes but we don't
     want to leave anybody behind.
@@ -86,7 +86,7 @@ table {
 body {
     font-family: 'Cabin', sans-serif;
     min-height: 740px;
-    
+
     background: @bg;
     background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(rgb(240, 240, 240)), to(rgb(190, 190, 190)));
     background: -webkit-radial-gradient(@bg, @bg_highlight);
@@ -114,7 +114,7 @@ a {
     color: @blue;
     text-decoration: none;
     padding: 0 0.1em;
-    
+
     -webkit-transition: 0.5s;
     -moz-transition:    0.5s;
     -ms-transition:     0.5s;
@@ -131,18 +131,18 @@ a:focus {
     Because the main point behind the impress.js demo is to demo impress.js
     we display a fallback message for users with browsers that don't support
     all the features required by it.
-    
+
     All of the content will be still fully accessible for them, but I want
     them to know that they are missing something - that's what the demo is
     about, isn't it?
-    
+
     And then we hide the message, when support is detected in the browser.
 */
 
 .fallback-message {
     font-family: sans-serif;
     line-height: 1.3;
-    
+
     width: 780px;
     padding: 10px 10px 0;
     margin: 20px auto;
@@ -162,7 +162,7 @@ a:focus {
 
 /*
     Now let's style the presentation steps.
-    
+
     We start with basics to make sure it displays correctly in everywhere ...
 */
 
@@ -185,7 +185,7 @@ a:focus {
 
 /*
     ... and we enhance the styles for impress.js.
-    
+
     Basically we remove the margin and make inactive steps a little bit transparent.
 */
 .impress-enabled .step {
@@ -204,9 +204,9 @@ a:focus {
 /*
     These 'slide' step styles were heavily inspired by HTML5 Slides:
     http://html5slides.googlecode.com/svn/trunk/styles.css
-    
+
     ;)
-    
+
     They cover everything what you see on first three steps of the demo.
 */
 .slide {
@@ -261,7 +261,7 @@ pre {
 
 /*
     And now we start to style each step separately.
-    
+
     I agree that this may be not the most efficient, object-oriented and
     scalable way of styling, but most of steps have quite a custom look
     and typography tricks here and there, so they had to be styles separately.
@@ -306,9 +306,10 @@ pre {
         color: @emph_content;
     }
     div.bullets {
-        float:left;
+        float: left;
         font-size: 24pt;
-        width: 400px;
+        width: 350px;
+        margin-right: 75px;
         ul {
             list-style: disc;
             ul {
@@ -321,9 +322,7 @@ pre {
         }
     }
     div.social {
-        float:right;
-        position: relative;
-        left: 100px;
+        float: right;
         div {
             font-family: 'Inconsolata';
             font-size: 18pt;
@@ -425,7 +424,6 @@ pre {
 
 
 #types {
-    width: 1200px;
     code {
         font-size: 20pt;
     }
@@ -492,13 +490,18 @@ pre {
 }
 
 #prototypes-example {
-    width: 1200px;
+    h1 {
+        font-size: 32pt;
+    }
     code {
         font-size: 17pt;
+        margin: 0px;
+        padding: 5px;
     }
     div {
         h2 {
             color: @violet;
+            font-size: 22px;
         }
         hr {
             width: 75%;
@@ -564,17 +567,19 @@ pre {
     }
     .tab {
         font-size: 18pt;
-        height: 600px;
+        height: 500px;
     }
     code {
         font-size: 18pt;
-    }
-    #jquery-tabs-better-events code, #jquery-tabs-better-events h2 {
         padding: 5px;
-        font-size: 18pt;
+        padding-left: 50px;
     }
+    /* #jquery-tabs-better-events code, #jquery-tabs-better-events h2 { */
+        /* padding: 5px; */
+        /* font-size: 18pt; */
+    /* } */
     .ui-tabs-anchor {
-        height: 56px;
+        height: 40px;
         max-width: 160px;
         overflow: wrap;
     }
@@ -591,6 +596,13 @@ pre {
         a {
             color: @blue;
         }
+    }
+    #demo-button {
+        float: left;
+    }
+    #demo-button-code {
+        font-size: 14pt;
+        padding-left: 20px;
     }
 }
 
@@ -686,27 +698,27 @@ hr {
 /*
     Now, when we have all the steps styled let's give users a hint how to navigate
     around the presentation.
-    
+
     The best way to do this would be to use JavaScript, show a delayed hint for a
     first time users, then hide it and store a status in cookie or localStorage...
-    
+
     But I wanted to have some CSS fun and avoid additional scripting...
-    
+
     Let me explain it first, so maybe the transition magic will be more readable
     when you read the code.
-    
+
     First of all I wanted the hint to appear only when user is idle for a while.
     You can't detect the 'idle' state in CSS, but I delayed a appearing of the
     hint by 5s using transition-delay.
-    
+
     You also can't detect in CSS if the user is a first-time visitor, so I had to
     make an assumption that I'll only show the hint on the first step. And when
     the step is changed hide the hint, because I can assume that user already
     knows how to navigate.
-    
+
     To summarize it - hint is shown when the user is on the first step for longer
     than 5 seconds.
-    
+
     The other problem I had was caused by the fact that I wanted the hint to fade
     in and out. It can be easily achieved by transitioning the opacity property.
     But that also meant that the hint was always on the screen, even if totally 
@@ -715,13 +727,13 @@ hr {
     Unfortunately you cannot transition between display `block` and `none` in pure
     CSS, so I needed a way to not only fade out the hint but also move it out of
     the screen.
-    
+
     I solved this problem by positioning the hint below the bottom of the screen
     with CSS transform and moving it up to show it. But I also didn't want this move
     to be visible. I wanted the hint only to fade in and out visually, so I delayed
     the fade in transition, so it starts when the hint is already in its correct
     position on the screen.
-    
+
     I know, it sounds complicated ... maybe it would be easier with the code?
 */
 
@@ -731,7 +743,7 @@ hr {
         impress.js, as they will have a linear scrollable view ...
     */
     display: none;
-    
+
     /*
         ... and give it some fixed position and nice styles.
     */
@@ -739,21 +751,21 @@ hr {
     left: 0;
     right: 0;
     bottom: 200px;
-    
+
     background: rgba(0,0,0,0.5);
     color: #EEE;
     text-align: center;
-    
+
     font-size: 50px;
     padding: 20px;
-    
+
     z-index: 100;
-    
+
     /*
         By default we don't want the hint to be visible, so we make it transparent ...
     */
     opacity: 0;
-    
+
     /*
         ... and position it below the bottom of the screen (relative to it's fixed position)
     */
@@ -766,11 +778,11 @@ hr {
     /*
         Now let's imagine that the hint is visible and we want to fade it out and move out
         of the screen.
-        
+
         So we define the transition on the opacity property with 1s duration and another
         transition on transform property delayed by 1s so it will happen after the fade out
         on opacity finished.
-        
+
         This way user will not see the hint moving down.
     */
     -webkit-transition: opacity 1s, -webkit-transform 0.5s 1s;
@@ -794,17 +806,17 @@ hr {
         position.
     */
     opacity: 1;
-    
+
     -webkit-transform: translateY(0px);
     -moz-transform:    translateY(0px);
     -ms-transform:     translateY(0px);
     -o-transform:      translateY(0px);
     transform:         translateY(0px);
-    
+
     /*
         Now for fade in transition we have the oposite situation from the one
         above.
-        
+
         First after 4.5s delay we animate the transform property to move the hint
         into its correct position and after that we fade it in with opacity 
         transition.
@@ -819,22 +831,22 @@ hr {
 /*
     And as the last thing there is a workaround for quite strange bug.
     It happens a lot in Chrome. I don't remember if I've seen it in Firefox.
-    
+
     Sometimes the element positioned in 3D (especially when it's moved back
     along Z axis) is not clickable, because it falls 'behind' the <body>
     element.
-    
+
     To prevent this, I decided to make <body> non clickable by setting 
     pointer-events property to `none` value.
     Value if this property is inherited, so to make everything else clickable
     I bring it back on the #impress element.
-    
+
     If you want to know more about `pointer-events` here are some docs:
     https://developer.mozilla.org/en/CSS/pointer-events
-    
+
     There is one very important thing to notice about this workaround - it makes
     everything 'unclickable' except what's in #impress element.
-    
+
     So use it wisely ... or don't use at all.
 */
 .impress-enabled          { pointer-events: none }
@@ -842,12 +854,12 @@ hr {
 
 /*
     There is one funny thing I just realized.
-    
+
     Thanks to this workaround above everything except #impress element is invisible
     for click events. That means that the hint element is also not clickable.
     So basically all of this transforms and delayed transitions trickery was probably
     not needed at all...
-    
+
     But it was fun to learn about it, wasn't it?
 */
 

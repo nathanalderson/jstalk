@@ -138,7 +138,7 @@
         <pre><code class="javascript">//types
 var num  = 1;
 var num2 = 2.0;   // no real distinction between floats and ints
-var str  = "It is pitch black. You are likely to be eaten by a grue.";
+var str  = "You are likely to be eaten by a grue.";
 var bool = true;
 var arr  = [1,2,"three"];
 arr[0];           // 1
@@ -291,25 +291,25 @@ f2(1);	// returns 3</code></pre>
             <hr>
             <pre><code class="cpp">class Animal {
 public:
-    Animal(string name)
-        : name(name) {}
-    virtual void speak() {}
-    string name;
+  Animal(string name)
+    : name(name) {}
+  virtual void speak() {}
+  string name;
 };
 
 class Cat : public Cat {
 public:
-    Cat(string name, bool canHasCheezburger)
-        : Animal(name)
+  Cat(string name, bool cheezburger)
+    : Animal(name)
 
-        , canHas(canHasCheezburger) {}
-    virtual void speak() {
-        if(canHas)
-            cout &lt;&lt; name &lt;&lt; " purrs";
-        else
-            cout &lt;&lt; name &lt;&lt; " hisses";
-    }
-    bool canHas;
+    , canHas(cheezburger) {}
+  virtual void speak() {
+    if(canHas)
+      cout &lt;&lt; name &lt;&lt; " purrs";
+    else
+      cout &lt;&lt; name &lt;&lt; " hisses";
+  }
+  bool canHas;
 }; </code></pre>
         </div>
         <div class='right'>
@@ -318,23 +318,23 @@ public:
             <pre><code class="javascript">
 
 function Animal(name) {
-    this.name = name;
-    this.speak = function() {}
+  this.name = name;
+  this.speak = function() {}
 
 }
 
 
 
-function Cat(name, canHasCheezburger) {
-    this.base = Animal;
-    this.base(name);
-    this.canHas = canHasCheezburger;
-    this.speak = function() {
-        if(this.canHas)
-            console.log(this.name + " purrs");
-        else
-            console.log(this.name + " hisses");
-    }
+function Cat(name, cheezburger) {
+  this.base = Animal;
+  this.base(name);
+  this.canHas = cheezburger;
+  this.speak = function() {
+    if(this.canHas)
+      console.log(this.name+" purrs");
+    else
+      console.log(this.name+" hisses");
+  }
 
 }
 Cat.prototype = new Animal;
@@ -365,28 +365,28 @@ Cat.prototype = new Animal;
                 field = document.getElementById('myfield');
                 field.value = Number(field.value) + 1;
             }
-            function subtractone(field) {
+            function subone(field) {
                 field.value = Number(field.value) - 1;
             }
         </script>
         <form name="myform">
             <input type="text" id="myfield" value="100" size="5">
             <input type="button" value=" + " onclick="addone()">
-            <input type="button" value=" - " onclick="subtractone(myfield);">
+            <input type="button" value=" - " onclick="subone(myfield);">
         </form>
         <pre><code class="html">&lt;script language="javascript"&gt;
     function addone() {
         field = document.getElementById('myfield');
         field.value = Number(field.value) + 1;
     }
-    function subtractone(field) {
+    function subone(field) {
         field.value = Number(field.value) - 1;
     }
 &lt;/script&gt;
 &lt;form name="myform"&gt;
 &lt;input type="text" id="myfield" value="100" size="5"&gt;
 &lt;input type="button" value=" + " onclick="addone();"&gt;
-&lt;input type="button" value=" - " onclick="subtractone(myfield);"&gt;
+&lt;input type="button" value=" - " onclick="subone(myfield);"&gt;
 &lt;/form&gt;</code></pre>
     </div>
 
@@ -432,17 +432,16 @@ $('#someid').addClass('newclass');</pre></code>
                     });
                 });
                 </script>
-                <pre><code>&lt;input type="button" id="demo-button" value="Click me!"/&gt;</pre></code>
                 <input type="button" id="demo-button" value="Click me!"/>
+                <pre><code id="demo-button-code">&lt;input type="button" id="demo-button" value="Click me!"/&gt;</pre></code>
                 <hr>
+                <h2>Sign up for click events</h2>
                 <pre><code class="javascript">$(document).ready(function() {
-    $('#demo-button').on('click', function() {
+    $('#demo-button').click(function() {
         theButton = $(this);
         theButton.val(theButton.val() + '!');
     });
 });</pre></code>
-                <h2>Or the shorthand equivalent...</h2>
-                <pre><code class="javascript">$('#demo-button').click(function() { ... });</pre></code>
                 <h2><em>Trigger</em> a click event...</h2>
                 <pre><code class="javascript">$('#demo-button').click();</pre></code>
                 <h2>Or for every button now and in the future...</h2>
