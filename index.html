@@ -228,7 +228,7 @@ undefined</code></pre>
         <h1>Closures</h1>
         <hr/>
         <p>A closure is an object consisting of a function <em>and</em> the environment (local variables)
-        in which the function what created.  Basically, it's function that remembers its context.</p>
+        in which the function was created.  Basically, it's function that remembers its context.</p>
         <pre><code>function makeIncrementor(i) {
   return function(x) {
     return x+i;
@@ -345,11 +345,14 @@ Cat.prototype = new Animal;
     <div id="dom" class="step">
         <h1>The DOM</h1>
         <hr>
-        <a title="By Birger Eriksson (Own work) [CC-BY-SA-3.0
-            (http://creativecommons.org/licenses/by-sa/3.0)], via Wikimedia Commons"
-            href="http://commons.wikimedia.org/wiki/File%3ADOM-model.svg">
+        <div class="image">
             <img width="256" alt="DOM-model" src="img/DOM-model.svg"/>
-        </a>
+            <div class="caption">
+                <a href="http://commons.wikimedia.org/wiki/File%3ADOM-model.svg">
+                    By Birger Eriksson (Own work) [CC-BY-SA-3.0 (http://creativecommons.org/licenses/by-sa/3.0)], via Wikimedia Commons
+                </a>
+            </div>
+        </div>
         <p>The DOM is the "Document Object Model".  It is a structural representation of the webpage
         and provides a way for your script to interact with what the user sees.</p>
     </div>
@@ -651,7 +654,8 @@ $.when(p1, p2)
         </ul>
     </div>
 
-    <div id="references" class="step">
+    <div id="references" class="step" data-x="-5000" data-y="-5000" data-z="5000"
+        data-rotate-dx="20" data-rotate-dy="-20" data-rotate-dz="0">
         <h1>Resources</h1>
         <hr>
         <ul>
@@ -669,7 +673,8 @@ $.when(p1, p2)
         </ul>
     </div>
 
-    <div id="tools-i-used" class="step">
+    <div id="tools-i-used" class="step" data-dx="0" data-dy="600" data-dz="300"
+        data-rotate-dx="0" data-rotate-dy="0" data-rotate-dz="0">
         <h1>Tools used in this presentation</h1>
         <hr>
         <ul>
