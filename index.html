@@ -5,18 +5,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=1024" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>Impress.js Scratchspace</title>
-    
-    <meta name="description" content="A place for me to fool around with Impress.js" />
+    <title>An Overview of JavaScript by Nathan Alderson</title>
+
+    <meta name="description" content="A Talk Given to Adtran's Catalytic Coding user group for it's
+        April Meeting" />
     <meta name="author" content="Nathan Alderson" />
 
     <link href="http://fonts.googleapis.com/css?family=Inconsolata:400,700|Cabin:400,700,400italic" rel="stylesheet" />
 
-    <!-- <link href="css/impress-demo.css" rel="stylesheet" /> -->
-    <!-- <link href="css/scratch.css" rel="stylesheet" /> -->
     <link rel="stylesheet/less" type="text/css" href="css/scratch.less" />
     <script src="js/less-1.3.0.min.js" type="text/javascript"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
 
     <!-- Code Highlighting via highlight.js -->
     <link rel="stylesheet" href="css/solarized_light.css">
@@ -144,6 +145,7 @@ arr[0];           // 1
 var obj  = {key:"value"}
 obj.key;          // "value"
 obj["key"];       // "value"
+var re   = /(omg )?kittens!{5,}/  // regular expression
 var val  = null
 var val  = undefined;
 var add  = function(arg1, arg2) {
@@ -222,7 +224,7 @@ undefined</code></pre>
     <p class="step section-header" id="less-basic" data-rotate-dy="90"
         data-dx="-1000" data-dy="0" data-dz"0">Less-Basic Stuff</p>
 
-    <div id="closures" class="step" data-rotate-dy="0" data-dx="-500" data-dy="-1000" data-dz="1000">
+    <div id="closures" class="step" data-rotate-dy="0" data-dx="-500" data-dy="-1000" data-dz="600">
         <h1>Closures</h1>
         <hr/>
         <p>A closure is an object consisting of a function <em>and</em> the environment (local variables)
@@ -237,6 +239,7 @@ f1 = makeIncrementor(1);
 f2 = makeIncrementor(2);
 f1(1);	// returns 2
 f2(1);	// returns 3</code></pre>
+    <img src="img/closure.jpg">
     </div>
 
     <div id="prototypes-summary" class="step">
@@ -352,23 +355,337 @@ Cat.prototype = new Animal;
     </div>
 
     <div id="dom-manip" class="step">
-        <h1>Manipulating the DOM</h1>
+        <h1 id="dom-manip-title">Manipulating the DOM</h1>
         <hr>
+        <script language="javascript">
+            function addone() {
+                field = document.getElementById('myfield');
+                field.value = Number(field.value) + 1;
+            }
+            function subtractone(field) {
+                field.value = Number(field.value) - 1;
+            }
+        </script>
+        <form name="myform">
+            <input type="text" id="myfield" value="100" size="5">
+            <input type="button" value=" + " onclick="addone()">
+            <input type="button" value=" - " onclick="subtractone(myfield);">
+        </form>
+        <pre><code class="html">&lt;script language="javascript"&gt;
+    function addone() {
+        field = document.getElementById('myfield');
+        field.value = Number(field.value) + 1;
+    }
+    function subtractone(field) {
+        field.value = Number(field.value) - 1;
+    }
+&lt;/script&gt;
+&lt;form name="myform"&gt;
+&lt;input type="text" id="myfield" value="100" size="5"&gt;
+&lt;input type="button" value=" + " onclick="addone();"&gt;
+&lt;input type="button" value=" - " onclick="subtractone(myfield);"&gt;
+&lt;/form&gt;</code></pre>
     </div>
 
-    <div class="step slide"> </div>
-    <div class="step slide"> </div>
-    <div class="step slide"> </div>
-    <div class="step slide"> </div>
-    <div class="step slide" > </div>
-    <div id="overview" class="step" data-x="2500" data-y="0" data-z="0" data-rotate-x="0"
-      data-rotate-y="0" data-rotate-z="0" data-scale="7">
+    <div class="step section-header" id="jquery" data-dx="-1100" data-dy="0" data-dz="0">
+        <p><img src="img/jquery.jpg"/></p>
+        <p class="subtitle">Don't code JavaScript without it.</p>
     </div>
-    <div id="references" class="" style="display:none">
+
+    <div id="jquery-overview" class="step">
+        <h1>jQuery does several things for you...</h1>
+        <hr>
+        <script> $(function() { $("#jquery-tabs").tabs(); }); </script>
+        <div id="jquery-tabs">
+            <ul class="tabs">
+                <li><a href="#jquery-tabs-better-dom-manip">Better<br/>DOM Manipulation</a></li>
+                <li><a href="#jquery-tabs-better-events">Better<br/>event handling</a></li>
+                <li><a href="#jquery-tabs-cross-browser">Cross-browser<br/>support</a></li>
+                <li><a href="#jquery-tabs-ajax">AJAX</a></li>
+                <li><a href="#jquery-tabs-animation">Animation</a></li>
+                <li><a href="#jquery-tabs-plugins">Lots of<br/>plugins</a></li>
+            </ul>
+            <div class="tab" id="jquery-tabs-better-dom-manip">
+                <h2>Powerful selectors</h2>
+                <pre><code class="javascript">$('#someid')
+$('.someclass')
+$("div.active .hidden:first")
+$('#listid &gt; li')</pre></code>
+                <h2>Traversal</h2>
+                <pre><code class="javascript">$('#someid').parent().sibling(".someclass")</pre></code>
+                <h2>Inspection</h2>
+                <pre><code class="javascript">$('#jquery-overview h1').text();  // The title of this slide
+$('#checkboxid').is(':checked');  // e.g. true</pre></code>
+                <h2>Manipulation</h2>
+                <pre><code class="javascript">$('#jquery-overview h1').text('I love every kind of cat!');
+$('#someid').addClass('newclass');</pre></code>
+            </div>
+            <div class="tab" id="jquery-tabs-better-events">
+                <script language="javascript">
+                $(document).ready(function() {
+                    $('#demo-button').on('click', function() {
+                        theButton = $(this);
+                        theButton.val(theButton.val() + '!');
+                    });
+                });
+                </script>
+                <pre><code>&lt;input type="button" id="demo-button" value="Click me!"/&gt;</pre></code>
+                <input type="button" id="demo-button" value="Click me!"/>
+                <hr>
+                <pre><code class="javascript">$(document).ready(function() {
+    $('#demo-button').on('click', function() {
+        theButton = $(this);
+        theButton.val(theButton.val() + '!');
+    });
+});</pre></code>
+                <h2>Or the shorthand equivalent...</h2>
+                <pre><code class="javascript">$('#demo-button').click(function() { ... });</pre></code>
+                <h2><em>Trigger</em> a click event...</h2>
+                <pre><code class="javascript">$('#demo-button').click();</pre></code>
+                <h2>Or for every button now and in the future...</h2>
+                <pre><code class="javascript">$(document).on('click', '.button', function() { ... });</pre></code>
+                <h2>Or only once per element...</h2>
+                <pre><code class="javascript">$(document).one('click', '.button', function() { ... });</pre></code>
+            </div>
+                <div class="tab" id="jquery-tabs-cross-browser">
+                <h2>The following works on all major browsers... except IE &lt; 9:</h2>
+                <pre><code class="javascript">[1,2,3].forEach(function(elem, index, arr) {
+    console.log("arr[" + index + "] = " + elem);
+});</pre></code>
+                <h2>Instead, use:</h2>
+                <pre><code class="javascript">$.each([1,2,3], function(index, elem) {
+    console.log("arr[" + index + "] = " + elem);
+});</pre></code>
+                <h2>Similarly:</h2>
+                <pre><code class="javascript">"  str   ".trim()</code></pre>
+                <h2>Doesn't work in IE &lt; 9, but:</h2>
+                <pre><code class="javascript">$.trim("  str   ")</code></pre>
+                <h2>does.</h2>
+            </div>
+            <div class="tab" id="jquery-tabs-ajax">
+                <script language="javascript">
+                    $(document).ready(function() {
+                        $('#ajax-demo-button').click(function() { $('#ajax-demo').load("/ajax.txt"); });
+                        $('#ajax-reset-button').click(function() { $('#ajax-demo').text("Reset"); });
+                    });
+                </script>
+                <input type="button" id="ajax-demo-button" value="Load AJAX"/>
+                <input type="button" id="ajax-reset-button" value="Reset"/>
+                <div id="ajax-demo">This text will get replaced dynamically</div>
+                <hr>
+                <pre><code>$(document).ready(function() {
+    $('#ajax-demo-button').click(function() {
+        $('#ajax-demo').load("/ajax.txt");
+    });
+    $('#ajax-reset-button').click(function() {
+        $('#ajax-demo').text("Reset");
+    });
+});</code></pre>
+            </div>
+            <div class="tab" id="jquery-tabs-animation">
+                <script language="javascript">
+                    $(document).ready(function() {
+                        $('#awesome-button').click(function() { $('#woo').toggle('slow'); });
+                    });
+                </script>
+                <input type="button" id="awesome-button" value="Click for AWESOME!"/>
+                <hr>
+                <pre><code>$(document).ready(function() {
+    $('#awesome-button').click(function() {
+        $('#woo').toggle('slow');
+    });
+});</code></pre>
+                <img id="woo" src="img/woo.jpg" />
+            </div>
+            <div class="tab" id="jquery-tabs-plugins">
+                Check out <a href="http://plugins.jquery.com/">plugins.jquery.com</a>.
+                <p>Especially useful is <a href="http://jqueryui.com">jQuery-ui</a>.</p>
+                <hr>
+                <script>
+                  $(function() {
+                    $( "#slider-vertical" ).slider({
+                      orientation: "vertical",
+                      range: "min",
+                      min: 0,
+                      max: 100,
+                      value: 60,
+                      slide: function( event, ui ) {
+                        $( "#amount" ).val( ui.value );
+                      }
+                    });
+                    $( "#amount" ).val( $( "#slider-vertical" ).slider( "value" ) );
+                  });
+                  </script>
+                <p>
+                  <label for="amount">Awesome:</label>
+                  <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
+                </p>
+                <div id="slider-vertical" style="height: 200px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="asynchronicity" class="step">
+        <h1>More on Asynchronicity</h1>
+        <hr>
+        <img src="img/callback.jpg">
         <ul>
-            <li><a href="https://developer.mozilla.org/en-US/docs/JavaScript">MDN</a>
+            <li>The browser is strictly single-threaded.</li>
+            <li>The whole DOM may not be available when your code runs.</li>
+            <li>Think "event-driven".</li>
+            <li>Learn to embrace the callback.</li>
         </ul>
     </div>
+
+    <div id="yikes" class="step">
+        <h1>Yikes!</h1>
+        <hr>
+        <h2>What does this print?</h2>
+        <pre><code class="javascript">for (var i = 1; i &lt;= 3; i++) {
+  setTimeout(function() { console.log(i); }, 0);
+}</code></pre>
+        <div class="answer appear hidden">
+            <h2>Answer:</h2>
+            <code>4 4 4</code>
+        </div>
+    </div>
+
+    <div class="section-header step extra-credit" data-x="0" data-y="-3000" data-z="3000"
+        data-rotate-x="00" data-rotate-y="0" data-rotat-z="0">
+        <p>Extra Credit</p>
+        <span class="subtitle">jQuery Deferreds!</span>
+    </div>
+
+    <div id="deferreds" class="step" data-dx="1000">
+        <h1>What are Promises?</h1>
+        <hr>
+        <p>Promises (sometimes called futures) are a way of handling asynchronous code more
+        elegantly than callbacks allow. "Deferred"s are jQuery's implementation of the JavaScript
+        Promises/A API.  In jQuery, a Deferred is an object which contains a promise and which
+        can be resolved.  A Promise allows users to attach handlers and determine the state.</p>
+        <p>Many jQuery functions now return Promises by default.</p>
+    </div>
+
+    <div id="wait" class="step">
+        <h1>First, let's make a function that returns a promise</h1>
+        <hr>
+        <pre><code class="javascript">$.wait = function(time) {
+    var d = $.Deferred();
+    setTimeout(d.resolve, time);
+    return d.promise();
+}</code></pre>
+    </div>
+
+    <div id="using-wait" class="step">
+        <h1>We can use our snazzy new function like this:</h1>
+        <hr>
+        <pre><code class="javascript">$.wait(1000).then(function() {
+    console.log("done!");
+})</code></pre>
+    </div>
+
+    <div id="using-wait-or" class="step">
+        <h1>Or, we could save the promise and attach more handlers...</h1>
+        <hr>
+        <pre><code class="javascript">var p = $.wait(1000);
+p.then(function() { console.log("I'm done!"); });
+p.then(function() { console.log("Me too!"); });</code></pre>
+    </div>
+
+    <div id="chainable" class="step">
+        <h1>Actually, they're chainable</h1>
+        <hr>
+        <pre><code class="javascript">$.wait(1000)
+.then(function() { console.log("I'm done!"); })
+.then(function() { console.log("Me too!"); });</code></pre>
+    </div>
+
+    <div id="what-if" class="step">
+        <h1>But what if everything's not rainbows and unicorns?</h1>
+        <hr>
+        <pre><code class="javascript">$.wait = function(time) {
+    var d = $.Deferred();
+    if(Math.round(Math.random))
+        setTimeout(d.resolve, time);
+    else
+        setTimeout(d.reject, time);
+    return d.promise();
+}</code></pre>
+    </div>
+
+    <div id="failures" class="step">
+        <h1>We can handle failures easily</h1>
+        <hr>
+        <pre><code class="javascript">$.wait(1000)
+.done(function() { console.log("Success! :) ") })
+.done(function() { console.log("More success.") })
+.fail(function() { console.log("Failure. :( ") })
+.always(function() { console.log("The end.") });</code></pre>
+    </div>
+
+    <div class="section-header step extra-credit">
+        <p>My favorite part...</p>
+        <img src="img/favorite.jpg" />
+    </div>
+
+    <div id="combining" class="step">
+        <h1>We can combine promises.</h1>
+        <hr>
+        <pre><code class="javascript">var p1 = $.wait(1000);
+var p2 = $.wait(2000);
+
+$.when(p1, p2)
+.done(function() { console.log("Success! :) ") })
+.fail(function() { console.log("Failure. :( ") })
+    </div>
+
+    <div id="finally" class="step" data-dx="1000">
+        <h1>Final notes</h1>
+        <hr>
+        <ul>
+            <li>You can add a handler any time.  If the promise has already resolved/rejected,
+            the handler will run immediately as appropriate.</li>
+            <li>There are ways to monitor progress on a deferred.</li>
+            <li>There are ways of modifying the success/fail status of a referred during the handler
+            chain.</li>
+        </ul>
+    </div>
+
+    <div id="references" class="step">
+        <h1>Resources</h1>
+        <hr>
+        <ul>
+            <li><a href="https://developer.mozilla.org/en-US/docs/JavaScript">Mozilla Developer Network</a></li>
+            <li><a href="http://learn.jquery.com/javascript-101/">jQuery JavaScript 101</a></li>
+            <li><a href="http://jquery.com/">jQuery.com</a></li>
+            <li>NOT w3schools (see <a href="http://w3fools.com">w3fools.com</a>)</li>
+        </ul>
+        <h1>References</h1>
+        <hr>
+        <ul>
+            <li><a href="http://eng.wealthfront.com/2012/12/jquerydeferred-is-most-important-client.html">This</a> wealthfrontEngineering aricle.</li>
+            <li><a href="http://www.intridea.com/blog/2011/2/8/fun-with-jquery-deferred">This</a> intridea article.</li>
+            <li>Several <a href="http://stackoverflow.com">Stack Overflow</a> answers.</li>
+        </ul>
+    </div>
+
+    <div id="tools-i-used" class="step">
+        <h1>Tools used in this presentation</h1>
+        <hr>
+        <ul>
+            <li><a href="https://github.com/bartaz/impress.js/">Impress.js</a></li>
+            <li><a href="http://ethanschoonover.com/solarized">Solarized Theme</a></li>
+            <li><a href="http://lesscss.org/">LESS</a> dynamic stylesheets</li>
+            <li>Google <a href="https://developers.google.com/speed/libraries/devguide">hosted libraries</a> and <a href="https://developers.google.com/fonts/">fonts</a></li>
+            <li><a href="http://git-scm.com/">git</a> and <a href="http://github.com">GitHub</a></li>
+            <li><a href="http://jquery.com">jQuery</a> and <a href="http://jqueryui.com">jQuery UI</a></li>
+            <li><a href="http://www.linuxjournal.com/content/tech-tip-really-simple-http-server-python">Python web server</a> (for development)</li>
+            <li><a href="http://builder.cheezburger.com/builder/">Cheezburger.com</a> builder</li>
+            <li><a href="http://highlight.js">highlight.js</a></li>
+            <li><a href="http://google.com/chrome">Chrome</a> browser</li>
+        </ul>
+    </div>
+
 </div>
 
 <!-- deltas! -->
@@ -413,30 +730,7 @@ $(document).on('impress:stepleave', function(e) {
 });
 </script>
 
-<!--
-    
-    Hint is not related to impress.js in any way.
-    
-    But it can show you how to use impress.js features in creative way.
-    
-    When the presentation step is shown (selected) its element gets the class of "active" and the body element
-    gets the class based on active step id `impress-on-ID` (where ID is the step's id)... It may not be
-    so clear because of all these "ids" in previous sentence, so for example when the first step (the one with
-    the id of `bored`) is active, body element gets a class of `impress-on-bored`.
-    
-    This class is used by this hint below. Check CSS file to see how it's shown with delayed CSS animation when
-    the first step of presentation is visible for a couple of seconds.
-    
-    ...
-    
-    And when it comes to this piece of JavaScript below ... kids, don't do this at home ;)
-    It's just a quick and dirty workaround to get different hint text for touch devices.
-    In a real world it should be at least placed in separate JS file ... and the touch content should be
-    probably just hidden somewhere in HTML - not hard-coded in the script.
-    
-    Just sayin' ;)
-    
--->
+<!-- Usage help -->
 <div class="hint">
     <p>Use a spacebar or arrow keys to navigate</p>
 </div>
@@ -446,94 +740,11 @@ if ("ontouchstart" in document.documentElement) {
 }
 </script>
 
-<!--
-    
-    Last, but not least.
-    
-    To make all described above really work, you need to include impress.js in the page.
-    I strongly encourage to minify it first.
-    
-    In here I just include full source of the script to make it more readable.
-    
-    You also need to call a `impress().init()` function to initialize impress.js presentation.
-    And you should do it in the end of your document. Not only because it's a good practice, but also
-    because it should be done when the whole document is ready.
-    Of course you can wrap it in any kind of "DOM ready" event, but I was too lazy to do so ;)
-    
--->
+<!-- make impress go -->
 <script src="js/impress.js"></script>
 <script>$(document).on('impress-go', function() { impress().init(); })</script>
 
-<!--
-    
-    The `impress()` function also gives you access to the API that controls the presentation.
-    
-    Just store the result of the call:
-    
-        var api = impress();
-    
-    and you will get three functions you can call:
-    
-        `api.init()` - initializes the presentation,
-        `api.next()` - moves to next step of the presentation,
-        `api.prev()` - moves to previous step of the presentation,
-        `api.goto( idx | id | element, [duration] )` - moves the presentation to the step given by its index number
-                id or the DOM element; second parameter can be used to define duration of the transition in ms,
-                but it's optional - if not provided default transition duration for the presentation will be used.
-    
-    You can also simply call `impress()` again to get the API, so `impress().next()` is also allowed.
-    Don't worry, it wont initialize the presentation again.
-    
-    For some example uses of this API check the last part of the source of impress.js where the API
-    is used in event handlers.
-    
--->
 
 </body>
 </html>
-
-<!--
-    
-    Now you know more or less everything you need to build your first impress.js presentation, but before
-    you start...
-    
-    Oh, you've already cloned the code from GitHub?
-    
-    You have it open in text editor?
-    
-    Stop right there!
-    
-    That's not how you create awesome presentations. This is only a code. Implementation of the idea that
-    first needs to grow in your mind.
-    
-    So if you want to build great presentation take a pencil and piece of paper. And turn off the computer.
-    
-    Sketch, draw and write. Brainstorm your ideas on a paper. Try to build a mind-map of what you'd like
-    to present. It will get you closer and closer to the layout you'll build later with impress.js.
-    
-    Get back to the code only when you have your presentation ready on a paper. It doesn't make sense to do
-    it earlier, because you'll only waste your time fighting with positioning of useless points.
-    
-    If you think I'm crazy, please put your hands on a book called "Presentation Zen". It's all about 
-    creating awesome and engaging presentations.
-    
-    Think about it. 'Cause impress.js may not help you, if you have nothing interesting to say.
-    
--->
-
-<!--
-    
-    Are you still reading this?
-    
-    For real?
-    
-    I'm impressed! Feel free to let me know that you got that far (I'm @bartaz on Twitter), 'cause I'd like
-    to congratulate you personally :)
-    
-    But you don't have to do it now. Take my advice and take some time off. Make yourself a cup of coffee, tea,
-    or anything you like to drink. And raise a glass for me ;)
-    
-    Cheers!
-    
--->
 
